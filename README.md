@@ -13,6 +13,6 @@ Requerimientos
 7.	Si todos los campos están bien, instancie una clase usuario para crear objeto y agregarlo a una lista. (4 pts). - LISTO
 8.	Interfaz idéntica. (4 pts). - LISTO
 9.	Saludos. Al presionar el botón si la validación está correcta debemos enviar un mensaje Toast con “[nombre de usuario] registrado”. (3 pts). - LISTO
-10.	Al presionar registrar debe mostrar por log cada usuario registrado. - LISTO
+10.	Al presionar registrar debe mostrar por log cada usuario registrado.
 Ej. Usuario: - Clave - Coreo. (5 pts). - LISTO
 11.	El botón registrar no puede estar habilitado si hay errores en los campos. (3 pts). - LISTO
