@@ -26,11 +26,16 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 import kotlin.math.sin
 import androidx.compose.ui.platform.LocalConfiguration
 import android.content.res.Configuration
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
+import androidx.compose.ui.graphics.Color
+import com.example.myapplication.ui.theme.ColorSamuel
 
 
 class MainActivity : ComponentActivity() {
@@ -245,7 +250,7 @@ fun registro() {
                 OutlinedTextField(
                     value = reingresarClave,
                     onValueChange = reingresaClaveDos,
-                    label = { Text("Crea una clave") },
+                    label = { Text("Vuelve a ingresar la clave") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
@@ -256,97 +261,122 @@ fun registro() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(30.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+            .padding(vertical = 30.dp)
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(ColorSamuel)
+                .padding(vertical = 15.dp)
 
-        OutlinedTextField(
-            value = usuario, onValueChange =
-                {
-                    usuario = it
-                    validarUsuario(it)
-                },
-            label = { Text("Crea tu usuario") },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text
-            ),
-            isError = isUsuarioLargo,
-            supportingText = {
-                if (isUsuarioLargo) {
-                    Text(
-                        "El nombre de $usuario es demaciado largo",
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-            }
+        ){
+            Text(
+                text = "Nuevo usuario",
+                color = Color.White,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.fillMaxWidth(),
 
-
-        )
-        OutlinedTextField(
-            value = correo, onValueChange = {
-                correo = it
-                validarCorreo(it)
-
-            },
-            isError = isErrorCorreo,
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email
-            ),
-            label = { Text("Ingresa tu correo") },
-            modifier = Modifier.fillMaxWidth(),
-            supportingText = {
-                if (isErrorCorreo) {
-                    Text(
-                        "Ingresa un correo valido",
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
-
-            }
-        )
-        horientacionPantalla(
-            clave = clave,
-            claveDos = {
-                clave = it
-                validadorClave(it)
-            },
-            reingresarClave = reingresarClave,
-            reingresaClaveDos = {
-                reingresarClave = it
-                claveRepetida(it)
-            }
-        )
-
-        Button(
-            enabled = !isErrorClave && !isErrorCorreo && !isErrorSegundaClave && camposLlenos,
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {
-                usuario = usuario.replace(" ", "")
-                if (camposLlenos) {
-                }
-                val nuevaPersona = Personas(usuario, correo, clave, reingresarClave)
-                listaPeronas.add(nuevaPersona)
-                Toast.makeText(
-                    conTexto,
-                    "El usuario $usuario a sido registrado correctamente",
-                    Toast.LENGTH_LONG
-                ).show()
-                listaPeronas.forEachIndexed { index, persona ->
-                    println("${index + 1}) Usuario: ${persona.usuario} - Clave: ${persona.clave} - reingreseCalve: ${persona.reingresarClave} - Correo: ${persona.correo}")
-                }
-                usuario = ""
-                clave = ""
-                correo = ""
-                reingresarClave = ""
-            }
-        ) { Text("Registrar") }
-
+                )
 
     }
 
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(30.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
+        ) {
+
+
+
+            OutlinedTextField(
+                value = usuario, onValueChange =
+                    {
+                        usuario = it
+                        validarUsuario(it)
+                    },
+                label = { Text("Crea tu usuario") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                ),
+                isError = isUsuarioLargo,
+                supportingText = {
+                    if (isUsuarioLargo) {
+                        Text(
+                            "El nombre de $usuario es demaciado largo",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+                }
+
+
+            )
+            OutlinedTextField(
+                value = correo, onValueChange = {
+                    correo = it
+                    validarCorreo(it)
+
+                },
+                isError = isErrorCorreo,
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                ),
+                label = { Text("Ingresa tu correo") },
+                modifier = Modifier.fillMaxWidth(),
+                supportingText = {
+                    if (isErrorCorreo) {
+                        Text(
+                            "Ingresa un correo valido",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                }
+            )
+            horientacionPantalla(
+                clave = clave,
+                claveDos = {
+                    clave = it
+                    validadorClave(it)
+                },
+                reingresarClave = reingresarClave,
+                reingresaClaveDos = {
+                    reingresarClave = it
+                    claveRepetida(it)
+                }
+            )
+
+            Button(
+                enabled = !isErrorClave && !isErrorCorreo && !isErrorSegundaClave && camposLlenos,
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    usuario = usuario.replace(" ", "")
+                    if (camposLlenos) {
+                    }
+                    val nuevaPersona = Personas(usuario, correo, clave, reingresarClave)
+                    listaPeronas.add(nuevaPersona)
+                    Toast.makeText(
+                        conTexto,
+                        "El usuario $usuario a sido registrado correctamente",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    listaPeronas.forEachIndexed { index, persona ->
+                        println("${index + 1}) Usuario: ${persona.usuario} - Clave: ${persona.clave} - reingreseCalve: ${persona.reingresarClave} - Correo: ${persona.correo}")
+                    }
+                    usuario = ""
+                    clave = ""
+                    correo = ""
+                    reingresarClave = ""
+                }
+            ) { Text("Registrar") }
+
+
+        }
+    }
 
 }
 
