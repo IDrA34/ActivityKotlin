@@ -36,6 +36,8 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
 import com.example.myapplication.ui.theme.ColorSamuel
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 
 class MainActivity : ComponentActivity() {
@@ -262,6 +264,7 @@ fun registro() {
         modifier = Modifier
             .fillMaxSize()
             .padding(vertical = 30.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         Box(
             modifier = Modifier
@@ -278,7 +281,7 @@ fun registro() {
 
                 )
 
-    }
+        }
 
 
         Column(
